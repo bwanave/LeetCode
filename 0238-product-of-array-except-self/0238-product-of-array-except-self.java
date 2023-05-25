@@ -1,4 +1,6 @@
 /*
+Approach: prefix product and postfix product
+
 Time Complexity: O(n)
 Space Complexity: O(n)
 */
@@ -10,7 +12,7 @@ class Solution {
             result[i] = left;
             left *= nums[i];
         }
-        
+
         int right = 1;
         for (int i = nums.length - 1; i >= 0; i--) {
             result[i] *= right;
