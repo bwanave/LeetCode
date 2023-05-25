@@ -1,6 +1,8 @@
-// Priority Queue
-// Time Complexity: nlogk, n = nums.length
-// Space Complexity: n + k
+/*
+Priority Queue
+Time Complexity: nlogk, n = nums.length
+Space Complexity: n + k */
+
 class Solution1 {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> count = new HashMap<>();
@@ -23,9 +25,10 @@ class Solution1 {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
-// Bucket sort
-// Time Complexity: n, n = nums.length
-// Space Complexity: n + k
+/* Bucket sort
+ Time Complexity: n, n = nums.length
+ Space Complexity: n + k */
+
 class Solution2 {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> count = new HashMap<>();
@@ -53,9 +56,10 @@ class Solution2 {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
-// Quick Select
-// Time Complexity: n, n = nums.length, in worst case it takes n^2
-// Space Complexity: n
+/* Quick Select
+ Time Complexity: n, n = nums.length, in worst case it takes n^2
+ Space Complexity: n */
+
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> count = new HashMap<>();
