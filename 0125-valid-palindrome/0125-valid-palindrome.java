@@ -1,3 +1,4 @@
+// Time: O(n) | Space: O(1)
 class Solution {
     public boolean isPalindrome(String s) {
         s = s.toLowerCase();
