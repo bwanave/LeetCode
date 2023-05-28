@@ -3,16 +3,17 @@ class Solution {
         s = s.toLowerCase();
         int left = 0, right = s.length() - 1;
         while (left < right) {
-            if (!Character.isLetterOrDigit(s.charAt(left))) {
+            char leftChar = s.charAt(left);
+            char rightChar = s.charAt(right);
+            if (!Character.isLetterOrDigit(leftChar)) {
                 left++;
                 continue;
             }
-            if (!Character.isLetterOrDigit(s.charAt(right))) {
+            if (!Character.isLetterOrDigit(rightChar)) {
                 right--;
                 continue;
             }
-
-            if (s.charAt(left) != s.charAt(right)) return false;
+            if (leftChar != rightChar) return false;
             left++;
             right--;
         }
