@@ -1,22 +1,20 @@
 class Solution {
     public Node cloneGraph(Node node) {
-        if (node == null) return null;
-        return cloneGraph(node, new HashMap<>());
+        if (node == null) return node;
+        return clone(node, new HashMap<>());
     }
 
 
-    public Node cloneGraph(Node orignalNode, Map<Node, Node> clonedNodes) {
-        if (clonedNodes.containsKey(orignalNode)) return clonedNodes.get(orignalNode);
-        Node clonedNode = new Node(orignalNode.val);
-        clonedNodes.put(orignalNode, clonedNode);
-        List<Node> clonedNeighbours = new ArrayList<>();
-        for (Node originalNeighbour : orignalNode.neighbors) {
-            Node clonedNeighbour = cloneGraph(originalNeighbour, clonedNodes);
-            clonedNeighbours.add(clonedNeighbour);
+    public Node clone(Node original, Map<Node, Node> visited) {
+        if (visited.containsKey(original)) return visited.get(original);
+        Node clone = new Node(original.val);
+        visited.put(original, clone);
+        List<Node> neighborClones = new ArrayList<>();
+        for (Node neighbor : original.neighbors) {
+            Node neighborClone = clone(neighbor, visited);
+            neighborClones.add(neighborClone);
         }
-        clonedNode.neighbors = clonedNeighbours;
-        return clonedNode;
+        clone.neighbors = neighborClones;
+        return clone;
     }
 }
-
-
