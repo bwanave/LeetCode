@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int leastInterval(char[] tasks, int n) {
         Map<Character, Integer> frequencyMap = new HashMap<>();
