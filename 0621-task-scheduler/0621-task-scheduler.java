@@ -13,7 +13,6 @@ class Solution {
             time++;
             int frequency = priorityQueue.poll();
             frequency--;
-            // System.out.println("Executed on " + time + ", remaining: " + frequency);
             if (frequency > 0) coolingQueue.offer(new int[]{time + n, frequency});
 
             if (!coolingQueue.isEmpty()) {
