@@ -31,7 +31,7 @@ class Twitter {
 
             int idx = tweetInfo.getIdx();
             Optional<Tweet> nextTweet = tweet.getUser().getTweet(++idx);
-            if (nextTweet.isPresent()) pq.offer(new TweetInfo(nextTweet.get(),idx));
+            if (nextTweet.isPresent()) pq.offer(new TweetInfo(nextTweet.get(), idx));
         }
 
         return newsFeed;
@@ -122,16 +122,16 @@ class Tweet {
 class TweetInfo {
     private final Tweet tweet;
     private final int idx;
-    
+
     public TweetInfo(Tweet tweet, int idx) {
         this.tweet = tweet;
         this.idx = idx;
     }
-    
+
     public Tweet getTweet() {
         return tweet;
     }
-    
+
     public int getIdx() {
         return idx;
     }
