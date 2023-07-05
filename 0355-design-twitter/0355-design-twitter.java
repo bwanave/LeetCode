@@ -16,22 +16,22 @@ class Twitter {
         User user = getUser(userId);
         user.follow(user);
 
-        PriorityQueue<Object[]> pq = new PriorityQueue<>((o1, o2) -> ((Tweet) o2[0]).getTime() - ((Tweet) o1[0]).getTime());
+        PriorityQueue<TweetInfo> pq = new PriorityQueue<>((tweetInfo1, tweetInfo2) -> tweetInfo2.getTweet().getTime() - tweetInfo1.getTweet().getTime());
         for (User followeeUser : user.getFollowingUsers()) {
             Optional<Tweet> tweet = followeeUser.getTweet(0);
-            tweet.ifPresent(value -> pq.offer(new Object[]{value, 0}));
+            tweet.ifPresent(value -> pq.offer(new TweetInfo(tweet.get(), 0)));
         }
 
         List<Integer> newsFeed = new ArrayList<>();
         while (!pq.isEmpty()) {
-            Object[] entry = pq.poll();
-            Tweet tweet = (Tweet) entry[0];
-            int idx = (int) entry[1];
+            TweetInfo tweetInfo = pq.poll();
+            Tweet tweet = tweetInfo.getTweet();
             newsFeed.add(tweet.getTweetId());
             if (newsFeed.size() == 10) return newsFeed;
 
+            int idx = tweetInfo.getIdx();
             Optional<Tweet> nextTweet = tweet.getUser().getTweet(++idx);
-            if (nextTweet.isPresent()) pq.offer(new Object[]{nextTweet.get(), idx});
+            if (nextTweet.isPresent()) pq.offer(new TweetInfo(nextTweet.get(),idx));
         }
 
         return newsFeed;
@@ -116,5 +116,23 @@ class Tweet {
 
     public User getUser() {
         return user;
+    }
+}
+
+class TweetInfo {
+    private final Tweet tweet;
+    private final int idx;
+    
+    public TweetInfo(Tweet tweet, int idx) {
+        this.tweet = tweet;
+        this.idx = idx;
+    }
+    
+    public Tweet getTweet() {
+        return tweet;
+    }
+    
+    public int getIdx() {
+        return idx;
     }
 }
