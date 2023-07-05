@@ -8,7 +8,7 @@ class Twitter {
     public void postTweet(int userId, int tweetId) {
         User user = getUser(userId);
         Tweet tweet = new Tweet(tweetId, ++time, user);
-        user.addTweet(tweet);
+        user.postTweet(tweet);
     }
 
     public List<Integer> getNewsFeed(int userId) {
@@ -64,13 +64,13 @@ class User {
         this.followingUsers = new HashSet<>();
     }
 
-    public void addTweet(Tweet tweet) {
+    public void postTweet(Tweet tweet) {
         tweets.add(0, tweet);
     }
 
-    public Optional<Tweet> getTweet(int i) {
-        if (i >= tweets.size()) return Optional.empty();
-        return Optional.of(tweets.get(i));
+    public Optional<Tweet> getTweet(int idx) {
+        if (idx >= tweets.size()) return Optional.empty();
+        return Optional.of(tweets.get(idx));
     }
 
     public void follow(User user) {
