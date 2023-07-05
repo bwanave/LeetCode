@@ -13,10 +13,9 @@ class Twitter {
 
     public List<Integer> getNewsFeed(int userId) {
         if (!userMap.containsKey(userId)) return Collections.emptyList();
-        User user = getUser(userId);
-        user.follow(user);
-
+        
         PriorityQueue<TweetInfo> pq = new PriorityQueue<>((tweetInfo1, tweetInfo2) -> tweetInfo2.getTweet().getTime() - tweetInfo1.getTweet().getTime());
+        User user = getUser(userId);
         for (User followeeUser : user.getFollowingUsers()) {
             Optional<Tweet> tweet = followeeUser.getTweet(0);
             tweet.ifPresent(value -> pq.offer(new TweetInfo(tweet.get(), 0)));
@@ -62,6 +61,7 @@ class User {
     public User(int userId) {
         this.userId = userId;
         this.followingUsers = new HashSet<>();
+        this.follow(this);
     }
 
     public void postTweet(Tweet tweet) {
