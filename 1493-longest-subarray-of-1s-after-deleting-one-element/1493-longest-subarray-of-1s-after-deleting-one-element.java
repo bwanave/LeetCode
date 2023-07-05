@@ -1,16 +1,23 @@
 class Solution {
     public int longestSubarray(int[] nums) {
-        int maxSize = 0;
-        Queue<Integer> deletedCharIndexes = new LinkedList<>();
+        // Number of zero's in the window.
+        int zeroCount = 0;
+        int longestWindow = 0;
+        // Left end of the window.
         int start = 0;
-        for (int end = 0; end < nums.length; end++) {
-            if (nums[end] != 1) deletedCharIndexes.offer(end);
-            
-            while (deletedCharIndexes.size() > 1) 
-                start = deletedCharIndexes.poll() + 1;
-            
-            maxSize = Math.max(maxSize, end - start + 1);
+        
+        for (int i = 0; i < nums.length; i++) {
+            zeroCount += (nums[i] == 0 ? 1 : 0);
+                          
+            // Shrink the window until the zero counts come under the limit.
+            while (zeroCount > 1) {
+                zeroCount -= (nums[start] == 0 ? 1 : 0);
+                start++;
+            }
+              
+            longestWindow = Math.max(longestWindow, i - start);
         }
-        return maxSize - 1;
+
+        return longestWindow;
     }
 }
