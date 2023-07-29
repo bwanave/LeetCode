@@ -7,11 +7,11 @@ class Solution {
             else angles.add(getPolarAngle(point, location));
         }
 
-      
+        Collections.sort(angles);
         List<Double> temp = new ArrayList<>(angles);
         for (double a : angles) temp.add(a + 360);
         angles = temp;
-  Collections.sort(angles);
+
         // Sliding window
         int count = 0;
         int start = 0;
