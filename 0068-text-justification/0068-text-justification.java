@@ -24,7 +24,6 @@ class Solution {
     }
     
     private String justify (int start, int end, int length, String[] words, int maxWidth, boolean lastLine) {
-        // System.out.println("start: "+start+", end: "+ end);
         if (length == maxWidth) return join(start,end, words, " ", 0);
         else {
             int extraSpaces = maxWidth - length;
