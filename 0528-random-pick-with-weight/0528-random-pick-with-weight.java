@@ -1,30 +1,17 @@
 class Solution {
-    
-    private int[] prefixSum;
-    private Random random;
-
+    int cnt=0;
+    TreeMap<Integer, Integer> map= new TreeMap<>();
+    Random rnd= new Random();
     public Solution(int[] w) {
-        for (int i = 1; i < w.length; i++)
-            w[i] += w[i - 1];
-        prefixSum = w;
-        random = new Random();
+        for (int idx=0; idx<w.length; idx++){
+            cnt+=w[idx];
+            map.put(cnt, idx);
+        }
     }
     
     public int pickIndex() {
-        int num = 1 + random.nextInt(prefixSum[prefixSum.length - 1]);
-        int left = 0;
-        int right = prefixSum.length - 1;
-        
-        while (left < right) {
-            int mid = (left + right) / 2;
-            if (num == prefixSum[mid])
-                return mid;
-            else if (num < prefixSum[mid]) 
-                right = mid;
-            else
-                left = mid + 1;
-        }
-        return left;
+        // int key= map.ceilingKey(rnd.nextInt(cnt)+1); don't forget to +1, because rand.nextInt(cnt) generate random integer in range [0,cnt-1]
+        int key= map.higherKey(rnd.nextInt(cnt));
+        return map.get(key);
     }
 }
-
